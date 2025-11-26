@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Компания - Оставьте заявку</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* HEADER */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 14px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* MAIN CONTENT */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 20px;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        /* FORM SECTION */
+        .form-section {
+            background: #f5f5f5;
+            padding: 60px 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .required {
+            color: #ff6b6b;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .response-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .response-message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .response-message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* FOOTER */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .scroll-to-form {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <nav>
+        <div class="logo">📱 Компания</div>
+        <ul>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#form">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <h1>Добро пожаловать! 👋</h1>
+    <p>Мы помогаем бизнесу расти и развиваться</p>
+    <button class="hero-btn" onclick="scrollToForm()">Оставить заявку</button>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="section container">
+    <h2>О нас</h2>
+    <p style="text-align: center; font-size: 16px; max-width: 600px; margin: 0 auto;">
+        Мы предоставляем высококачественные услуги для развития вашего бизнеса.
+        Наша команда готова помочь вам достичь ваших целей.
+    </p>
+</section>
+
+<!-- FEATURES SECTION -->
+<section id="services" class="section container">
+    <h2>Наши услуги</h2>
+    <div class="features">
+        <div class="feature">
+            <h3>🚀 Быстро</h3>
+            <p>Мы работаем эффективно и быстро доставляем результаты</p>
+        </div>
+        <div class="feature">
+            <h3>💼 Профессионально</h3>
+            <p>Команда экспертов с многолетним опытом</p>
+        </div>
+        <div class="feature">
+            <h3>✅ Надёжно</h3>
+            <p>Гарантируем качество и поддержку на всех этапах</p>
+        </div>
+    </div>
+</section>
+
+<!-- FORM SECTION -->
+<section id="form" class="form-section">
+    <div class="form-container">
+        <h2>💬 Оставьте заявку</h2>
+        <form id="leadForm">
+            <div class="form-group">
+                <label for="name">Имя <span class="required">*</span></label>
+                <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Ваше имя"
+                        required
+                >
+                <span class="error-message" data-field="name"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@mail.com"
+                        required
+                >
+                <span class="error-message" data-field="email"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Телефон <span class="required">*</span></label>
+                <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="+7 (999) 123-45-67"
+                        required
+                >
+                <span class="error-message" data-field="phone"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Сообщение</label>
+                <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Расскажите о вашей задаче или вопросе..."
+                ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Отправить заявку
+            </button>
+
+            <div id="responseMessage" class="response-message"></div>
+        </form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2024 Компания. Все права защищены.</p>
+</footer>
+
+<script>
+    // ⚙️ КОНФИГУРАЦИЯ - ЗАМЕНИ НА СВОЙ N8N WEBHOOK URL
+    const N8N_WEBHOOK_URL = 'https://masmfve.app.n8n.cloud/webhook-test/webhook';
+    // ============================================================
+
+    const form = document.getElementById('leadForm');
+    const responseMsg = document.getElementById('responseMessage');
+    const submitBtn = form.querySelector('.submit-btn');
+
+    // Валидация данных
+    function validateForm(formData) {
+        const errors = {};
+
+        if (!formData.name || formData.name.trim().length < 2) {
+            errors.name = 'Имя должно быть минимум 2 символа';
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email || !emailRegex.test(formData.email)) {
+            errors.email = 'Введите корректный email';
+        }
+
+        const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+        if (!formData.phone || !phoneRegex.test(formData.phone)) {
+            errors.phone = 'Введите корректный номер (минимум 10 цифр)';
+        }
+
+        return errors;
+    }
+
+    // Показываем ошибки
+    function showErrors(errors) {
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.classList.remove('show');
+            el.textContent = '';
+        });
+
+        Object.entries(errors).forEach(([field, message]) => {
+            const errorEl = document.querySelector(`[data-field="${field}"]`);
+            if (errorEl) {
+                errorEl.textContent = message;
+                errorEl.classList.add('show');
+            }
+        });
+    }
+
+    // Очищаем ошибки при фокусе
+    form.querySelectorAll('input, textarea').forEach(field => {
+        field.addEventListener('focus', function() {
+            const errorEl = document.querySelector(`[data-field="${this.name}"]`);
+            if (errorEl) {
+                errorEl.classList.remove('show');
+            }
+        });
+    });
+
+    // Скролл к форме
+    function scrollToForm() {
+        document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Обработка отправки формы
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            message: document.getElementById('message').value,
+        };
+
+        const errors = validateForm(formData);
+        if (Object.keys(errors).length > 0) {
+            showErrors(errors);
+            return;
+        }
+
+        const enrichedData = {
+            ...formData,
+            source: 'Website',
+            timestamp: new Date().toISOString(),
+            url: window.location.href,
+            userAgent: navigator.userAgent,
+        };
+
+        submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.innerHTML = '<span class="loading"></span>Отправка...';
+        responseMsg.classList.remove('success', 'error');
+
+        try {
+            const response = await fetch(N8N_WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(enrichedData),
+            });
+
+            if (response.ok) {
+                responseMsg.classList.add('success');
+                responseMsg.textContent = '✅ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами вскоре.';
+                form.reset();
+                setTimeout(() => {
+                    responseMsg.classList.remove('success');
+                }, 5000);
+            } else {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            responseMsg.classList.add('error');
+            responseMsg.textContent = '❌ Ошибка при отправке. Проверьте консоль браузера (F12).';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    });
+</script>
+</body>
+</html>
